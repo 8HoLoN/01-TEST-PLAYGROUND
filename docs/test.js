@@ -1,3 +1,4 @@
 export default () => {
-    console.log('plop');
+    const a = {};
+    a.b ?.c;
 };
