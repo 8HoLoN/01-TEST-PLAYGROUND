@@ -14,28 +14,32 @@
     💤
     <script>
         const features = {
-            'optional_chaining':_=>{
-                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-                return import('./test.js').then(_=> true).catch(_=>false);
+            'optional_chaining': _ => {
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+                return import('./test.js').then(_ => true).catch(_ => false);
             },
-            'globalThis':_=>globalThis!==undefined && globalThis===window
+            'globalThis': _ => globalThis !== undefined && globalThis === window
         };
-        
+
         // ES10 ES2019
         // https://maksimivanov.com/posts/new-es10-es2019-javascript-features/
         // https://webapplog.com/es7-es8/
         // https://node.university/blog/15982/es7es8
         // https://github.com/tc39/proposals
         // 
-        
-        document.querySelector('#features').innerHTML=`
-        
-        `;
-        
-        Promise.all(Object.entries(features).map(async([featureName,featureTest])=>{
-            return [featureName,await featureTest()]
-        })).then((...featureResult)=>{
-            console.log(featureResult);
+
+
+
+        Promise.all(Object.entries(features).map(async ([featureName, featureTest]) => {
+            return [featureName, await featureTest()]
+        })).then(featureResults => {
+
+            document.querySelector('#features').innerHTML = `${
+                featureResults.map(([featureName, featureTest]) => {
+                    return `<div><span>${featureName}</span><span>${featureTest}</span></div>`;
+                }).join('')
+            }`;
+
         });
 
         /*
@@ -44,7 +48,7 @@
             console.log(await features['globalThis']());
         })();
         //*/
-        
+
 
         // # private member
 
@@ -52,7 +56,7 @@
         // https://stackoverflow.com/questions/21724326/what-is-the-motivation-for-bringing-symbols-to-es6
         // https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/
         // http://www.zsoltnagy.eu/es6-symbols-and-its-use-cases/
-        
+
         // https://medium.com/@madasamy/javascript-brief-history-and-ecmascript-es6-es7-es8-features-673973394df4
         // https://medium.com/@js_tut/the-complete-guide-to-es10-features-f09a8c7be1bd
     </script>
