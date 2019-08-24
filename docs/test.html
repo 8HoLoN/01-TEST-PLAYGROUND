@@ -12,6 +12,19 @@
     plop
     💤
     <script>
+        const features = [
+            'optional_chaining':_=>{
+                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+                return import('./test.js').then(x => {
+                    console.log('OK:',x);
+                    return true;
+                }).catch(e=>{
+                    console.log('NOK:',e); 
+                    return false;
+                });
+            }
+        ];
+        
         // ES10 ES2019
         // https://maksimivanov.com/posts/new-es10-es2019-javascript-features/
         // https://webapplog.com/es7-es8/
@@ -19,13 +32,8 @@
         // https://github.com/tc39/proposals
         // 
         
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-        import('./test.js').then(x => {
-            console.log('OK:',x);
-        }).catch(e=>{
-            console.log('NOK:',e);    
-        });
-        
+
+        console.log(features[optional_chaining]());
         
         console.log('globalThis:',globalThis);
         
