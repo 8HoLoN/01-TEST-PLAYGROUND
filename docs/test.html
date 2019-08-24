@@ -32,8 +32,10 @@
         // https://github.com/tc39/proposals
         // 
         
-
-        console.log(features['optional_chaining']());
+        (async()=>{
+            console.log(await features['optional_chaining']());
+        })();
+        
         
         console.log('globalThis:',globalThis);
         
