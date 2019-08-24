@@ -34,7 +34,7 @@
         
         Promise.all(Object.entries(features).map(async([featureName,featureTest])=>{
             return [featureName,await featureTest()]
-        })).then(...featureResult=>{
+        })).then((...featureResult)=>{
             console.log(featureResult);
         });
 
