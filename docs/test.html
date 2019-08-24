@@ -11,7 +11,12 @@
     <script>
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
         const a = {};
-        a.b?.c;
+        try {
+            a.b?.c;
+        } catch (error) {
+            console.log("error");
+        }
+
     </script>
 </body>
 </html>
