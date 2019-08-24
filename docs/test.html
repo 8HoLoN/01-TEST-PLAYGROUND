@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <div id="features"></div>
     plop
     💤
     <script>
@@ -27,11 +28,22 @@
         // https://github.com/tc39/proposals
         // 
         
+        document.querySelector('#features').innerHTML=`
+        
+        `;
+        
+        Promise.all(Object.entries(features).map(async([featureName,featureTest])=>{
+            return [featureName,await featureTest()]
+        })).then(...featureResult=>{
+            console.log(featureResult);
+        });
+
+        /*
         (async()=>{
             console.log(await features['optional_chaining']());
             console.log(await features['globalThis']());
         })();
-        
+        //*/
         
 
         // # private member
