@@ -1,4 +1,4 @@
 export default () => {
     const a = {};
-    a.b ?.c;
+    a.b?.c;
 };
