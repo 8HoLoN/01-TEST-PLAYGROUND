@@ -26,10 +26,12 @@
             'Global this': _ => globalThis !== undefined && globalThis === window
         };
 
-        Promise.all(Object.entries(features).map(
-            async ([featureName, featureTest]) => [featureName, await featureTest()]
-        )).then(featureResults => {
+        (async()=>{
 
+            const featureResults = await Promise.all(Object.entries(features).map(
+                async ([featureName, featureTest]) => [featureName, await featureTest()]
+            ));
+            
             document.querySelector('#features').innerHTML = `
             <table>
                 ${featureResults.map(([featureName, featureTest]) => `
@@ -38,7 +40,8 @@
             </table>
             `;
 
-        });
+        })();
+
 
         // https://ruanyf.github.io/es-checker/
 
@@ -50,10 +53,7 @@
         // 
 
         /*
-        (async()=>{
-            console.log(await features['optional_chaining']());
-            console.log(await features['globalThis']());
-        })();
+
         //*/
 
 
