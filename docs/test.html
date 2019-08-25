@@ -31,11 +31,13 @@
             return [featureName, await featureTest()]
         })).then(featureResults => {
 
-            document.querySelector('#features').innerHTML = `${
-                featureResults.map(([featureName, featureTest]) => {
-                    return `<div><span>${featureName}</span><span>${featureTest}</span></div>`;
-                }).join('')
-            }`;
+            document.querySelector('#features').innerHTML = `
+            <table>
+                ${featureResults.map(([featureName, featureTest]) => `
+                    <tr><td>${featureName}</td><td>${featureTest}</td></tr>
+                `).join('')}
+            </table>
+            `;
 
         });
 
