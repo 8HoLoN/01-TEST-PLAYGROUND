@@ -24,7 +24,7 @@
     <script>
         const features = {
             'Optional chaining': _ => import('./optional-chaining.js').then(_ => _.default()).catch(_ => false),
-            'Global this': _ => globalThis !== undefined && globalThis === window
+            'Global this': _ => import('./global-this.js').then(_ => _.default()).catch(_ => false)
         };
 
         (async()=>{
