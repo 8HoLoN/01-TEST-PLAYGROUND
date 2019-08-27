@@ -26,13 +26,12 @@
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
 
-
         const features = [
-            'Optional chaining',
-            'Global this'
-        ].map(_=>[_,_.toLowerCase().replace(/ /g,'-')])
+            ['Optional chaining','Global_Objects/globalThis']
+            ['Global this','Operators/Optional_chaining']
+        ].map(_=>[_[0],_.toLowerCase().replace(/ /g,'-'),_[1]])
         .reduce((acc,c)=>
-            (acc[c[0]]= _ => import(`./${c[1]}.js`).then(_ => _.default()).catch(_ => false),acc)
+            (acc[c[0]]= [_ => import(`./${c[1]}.js`).then(_ => _.default()).catch(_ => false),c[2]],acc)
         ,{});
 
         /*
@@ -45,12 +44,12 @@
         (async()=>{
 
             const featureResults = await Promise.all(Object.entries(features).map(
-                async ([featureName, featureTest]) => [featureName, await featureTest()]
+                async ([featureName, [featureTest,featureLink]]) => [featureName, await featureTest(),featureLink]
             ));
             
             document.querySelector('#features').innerHTML = `
             <table>
-                ${featureResults.map(([featureName, featureTest]) => `
+                ${featureResults.map(([featureName, featureTest, featureLink]) => `
                     <tr><td>${featureName}</td><td>${featureTest}</td></tr>
                 `).join('')}
             </table>
