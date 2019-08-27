@@ -55,11 +55,10 @@
                 async ([featureName, [featureTest, featureLink]]) => [featureName, await featureTest(), featureLink]
             ));
 
-/*
-featureResults.map(([featureName, featureTest, featureLink]) => `
-                    <tr><td><a href="${mdn}${featureLink}">${featureName}</a></td><td id="${featureLink}">${featureTest}</td></tr>
-                `).join('')
-//*/
+            featureResults.map(([featureName, featureTest, featureLink]) => {
+                document.querySelector(`#${featureLink}`).innerHTML=`${featureTest}`;
+            });
+
 
         })();
 
