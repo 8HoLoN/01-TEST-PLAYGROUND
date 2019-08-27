@@ -81,11 +81,11 @@
         const features = [
             ['Optional chaining', 'Global_Objects/globalThis'],
             ['Global this', 'Operators/Optional_chaining']
-        ].map(_ => [_[0], _[0].toLowerCase().replace(/ /g, '-'), _[1]])
-            .reduce((acc, c) =>
-                (acc[c[0]] = [_ => import(`./${c[1]}.js`).then(_ => _.default()).catch(_ => false), c[2]], acc)
-                , {});
-
+        ].map(_ => [
+            _[0],
+            _ => import(`./${_[0].toLowerCase().replace(/ /g, '-')}.js`).then(_ => _.default()).catch(_ => false),
+            _[1]]
+        );
 
         document.querySelector('#features').innerHTML = `
             <table>
@@ -96,10 +96,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    ${Object.entries(features).map(([featureName, [featureTest, featureLink]]) => `
+                    ${features.map(([featureName, featureTest, featureLink]) => `
                         <tr><td><a href="${mdn}${featureLink}">${featureName}</a></td><td id="${featureLink.replace(/\//g, '-')}">loading...</td></tr>
-                    `
-        ).join('')}
+                    `).join('')}
                 </tbody>
             </table>
             `;
@@ -107,14 +106,13 @@
 
         (async () => {
 
-            const featureResults = await Promise.all(Object.entries(features).map(
-                async ([featureName, [featureTest, featureLink]]) => [featureName, await featureTest(), featureLink]
+            const featureResults = await Promise.all(features.map(
+                async ([featureName, featureTest, featureLink]) => [featureName, await featureTest(), featureLink]
             ));
 
             featureResults.map(([featureName, featureTest, featureLink]) => {
                 document.querySelector(`#${featureLink.replace(/\//g, '-')}`).innerHTML = `${featureTest}`;
             });
-
 
         })();
 
