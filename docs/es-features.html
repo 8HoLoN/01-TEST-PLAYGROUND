@@ -81,10 +81,10 @@
         const features = [
             ['Optional chaining', 'Global_Objects/globalThis'],
             ['Global this', 'Operators/Optional_chaining']
-        ].map(_ => [
-            _[0],
-            _ => import(`./${_[0].toLowerCase().replace(/ /g, '-')}.js`).then(_ => _.default()).catch(_ => false),
-            _[1]]
+        ].map(([featureName, featureLink]) => [
+            featureName,
+            _ => import(`./${featureName.toLowerCase().replace(/ /g, '-')}.js`).then(_ => _.default()).catch(_ => false),
+            featureLink
         );
 
         document.querySelector('#features').innerHTML = `
