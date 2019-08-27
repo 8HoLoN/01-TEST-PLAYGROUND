@@ -29,7 +29,7 @@
         const features = [
             ['Optional chaining','Global_Objects/globalThis']
             ['Global this','Operators/Optional_chaining']
-        ].map(_=>[_[0],_.toLowerCase().replace(/ /g,'-'),_[1]])
+        ].map(_=>[_[0],_[0].toLowerCase().replace(/ /g,'-'),_[1]])
         .reduce((acc,c)=>
             (acc[c[0]]= [_ => import(`./${c[1]}.js`).then(_ => _.default()).catch(_ => false),c[2]],acc)
         ,{});
