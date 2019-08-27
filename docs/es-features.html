@@ -41,10 +41,18 @@
 
         document.querySelector('#features').innerHTML = `
             <table>
-                ${Object.entries(features).map(([featureName, [featureTest, featureLink]]) => `
-                    <tr><td><a href="${mdn}${featureLink}">${featureName}</a></td><td id="${featureLink.replace(/\//g,'-')}">loading...</td></tr>
-                `
-                ).join('')}
+                <thead>
+                    <tr>
+                        <th>Feature name</th>
+                        <th>Availibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${Object.entries(features).map(([featureName, [featureTest, featureLink]]) => `
+                        <tr><td><a href="${mdn}${featureLink}">${featureName}</a></td><td id="${featureLink.replace(/\//g,'-')}">loading...</td></tr>
+                    `
+                    ).join('')}
+                </tbody>
             </table>
             `;
 
