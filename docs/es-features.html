@@ -85,7 +85,7 @@
             featureName,
             _ => import(`./${featureName.toLowerCase().replace(/ /g, '-')}.js`).then(_ => _.default()).catch(_ => false),
             featureLink
-        );
+        ]);
 
         document.querySelector('#features').innerHTML = `
             <table>
