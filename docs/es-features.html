@@ -92,7 +92,7 @@
                 </thead>
                 <tbody>
                     ${features.map(([featureName, featureTest, featureLink]) => `
-                        <tr><td><a href="${mdn}${featureLink}">${featureName}</a></td><td id="${featureLink.replace(/\//g, '-')}">loading...</td></tr>
+                        <tr><td><a href="${mdn}${featureLink}">${featureName}</a></td><td id="${featureLink.replace(/\//g, '-')}"></td></tr>
                     `).join('')}
                 </tbody>
             </table>
@@ -102,12 +102,18 @@
         (async () => {
 
             const featureResults = await Promise.all(features.map(
-                async ([featureName, featureTest, featureLink]) => [featureName, await featureTest(), featureLink]
+                async ([featureName, featureTest, featureLink]) => [
+                    featureName, 
+                    await featureTest().then(isAvailable=>
+                        (document.querySelector(`#${featureLink.replace(/\//g, '-')}`).innerHTML = `${isAvailable}`,isAvailable)
+                    ), 
+                    featureLink]
             ));
-
+            /*
             featureResults.map(([featureName, featureTest, featureLink]) => {
                 document.querySelector(`#${featureLink.replace(/\//g, '-')}`).innerHTML = `${featureTest}`;
             });
+            //*/
 
         })();
 
