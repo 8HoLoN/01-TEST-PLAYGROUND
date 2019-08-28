@@ -75,7 +75,9 @@
 
         const features = [
             ['Optional chaining', 'Global_Objects/globalThis'],
-            ['Global this', 'Operators/Optional_chaining']
+            ['Global this', 'Operators/Optional_chaining'],
+            ['BigInt', 'Global_Objects/BigInt'],
+            
         ].map(([featureName, featureLink]) => [
             featureName,
             _ => import(`./${featureName.toLowerCase().replace(/ /g, '-')}.js`).then(_ => _.default()).catch(_ => false),
