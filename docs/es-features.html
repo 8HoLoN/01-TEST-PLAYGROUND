@@ -79,7 +79,8 @@
             ['BigInt', 'Global_Objects/BigInt'],
             ['matchAll', 'Global_Objects/String/matchAll'],
             ['flat', 'Global_Objects/Array/flat'],
-            
+            ['flatMap', 'Global_Objects/Array/flatMap'],
+                        
         ].map(([featureName, featureLink]) => [
             featureName,
             _ => import(`./${featureName.toLowerCase().replace(/ /g, '-')}.js`).then(_ => _.default()).catch(_ => false),
